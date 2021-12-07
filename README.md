@@ -8,11 +8,11 @@
 
 
 ## 效果:
-![](doc\result1.jpg)
+![](./doc/result1.jpg)
 
 
 
-![](doc\result2.jpg)
+![](./doc/result2.jpg)
 
 ## 运行：
 
