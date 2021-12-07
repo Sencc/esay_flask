@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="/static/style.css">
+
+    <title>国旗特效</title>
+</head>
+<body class="text-center">
+<form class="form-signin" method=post enctype=multipart/form-data>
+    <img class="mb-4" src="" alt="" width="300" id='myfile'>
+    <h1 class="h3 mb-3 font-weight-normal">上传图片</h1>
+    <input type="file" name="file" class="form-control-file" id="inputfile">
+    <br/>
+    <b> 添加信息：</b>
+    <input type="text" class="txt_input" name="name" value="None" style="margin-top:10px;"/>
+    <br/>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-top:10px;">开始</button>
+</form>
+<script src="//code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+<script src="//stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $('#inputfile').bind('change', function () {
+        let fileSize = this.files[0].size / 1024 / 1024; // this gives in MB
+        if (fileSize > 1) {
+            $("#inputfile").val(null);
+            alert('file is too big. images more than 1MB are not allowed')
+            return
+        }
+
+        // 用javascript进行上传图片的可视化
+        let fileObj = this.files[0];
+        // 生成一个文件读取的内置对象
+        let fileReader = new FileReader();
+        // 将文件对象传递给内置对象
+        fileReader.readAsDataURL(fileObj); //这是一个异步执行的过程，所以需要onload回调函数执行读取数据后的操作
+        // 将读取出文件对象替换到img标签
+        fileReader.onload = function () {  // 等待文件阅读器读取完毕再渲染图片
+            $('#myfile').attr('src', fileReader.result)
+        }
+
+        // 判断是否为jpg图片
+        // let ext = $('#inputfile').val().split('.').pop().toLowerCase();
+        // if($.inArray(ext, ['jpg','jpeg']) == -1) {
+        //   $("#inputfile").val(null);
+        //   alert('only jpeg/jpg files are allowed!');
+        // }
+    });
+</script>
+</body>
+</html>

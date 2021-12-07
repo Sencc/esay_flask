@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="/static/style.css">
+
+    <title>国庆特性头像制作</title>
+</head>
+<body class="text-center">
+
+<table style="margin: 0 auto;">
+    <tr>
+        <td><img class="mb-4" src="data:;base64,{{ ori_img }}" width="300" alt="The processed image"
+                 style="margin-right: 50px"/></td>
+        <td><img class="mb-4" src="data:;base64,{{ img }}" width="300" alt="The processed image"/></td>
+        <td>
+            <button onclick="savePicture()">点击保存头像</button>
+        </td>
+    </tr>
+</table>
+<script>
+    function savePicture() {
+        const base64 = '{{ img }}';
+        var bytes = atob(base64);
+        let ab = new ArrayBuffer(bytes.length);
+        let ia = new Uint8Array(ab);
+        for (let i = 0; i < bytes.length; i++) {
+            ia[i] = bytes.charCodeAt(i);
+        }
+        var blob = new Blob([ab], {type: 'application/octet-stream'});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = new Date().valueOf() + ".png";
+        var e = document.createEvent('MouseEvents');
+        e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        a.dispatchEvent(e);
+        URL.revokeObjectURL(url);
+    }
+</script>
+</body>
+</html>
