@@ -8,11 +8,11 @@
 
 
 ## 效果:
-![](E:\code\esay_flask\doc\result1.jpg)
+![](doc\result1.jpg)
 
 
 
-![](E:\code\esay_flask\doc\result2.jpg)
+![](doc\result2.jpg)
 
 ## 运行：
 
